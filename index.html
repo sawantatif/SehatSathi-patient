@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SehatSathi - Patient App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3b82f6">
+</head>
+<body>
+    <!-- Language Selection Screen -->
+    <div class="language-screen" id="languageScreen">
+        <div class="language-container">
+            <div class="app-logo">
+                <i class="fas fa-heartbeat"></i>
+                <h1>SehatSathi</h1>
+                <p data-translate="tagline">Your Health Companion</p>
+            </div>
+            <div class="language-selector">
+                <h2 data-translate="select_language">Select Language</h2>
+                <div class="language-options">
+                    <button class="language-btn" onclick="selectLanguage('en')">
+                        <span class="flag">🇺🇸</span>
+                        <span>English</span>
+                    </button>
+                    <button class="language-btn" onclick="selectLanguage('hi')">
+                        <span class="flag">🇮🇳</span>
+                        <span>हिंदी</span>
+                    </button>
+                    <button class="language-btn" onclick="selectLanguage('pa')">
+                        <span class="flag">🇮🇳</span>
+                        <span>ਪੰਜਾਬੀ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen" style="display: none;">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-user-circle"></i>
+                <h2 data-translate="welcome_back">Welcome Back</h2>
+                <p data-translate="login_subtitle">Enter your details to continue</p>
+            </div>
+            
+            <div class="login-form">
+                <div class="input-group">
+                    <label data-translate="phone_number">Phone Number</label>
+                    <input type="tel" id="phoneNumber" placeholder="+91 98765 43210" maxlength="15">
+                </div>
+                
+                <div class="input-group">
+                    <label data-translate="aadhaar_number">Aadhaar Number (Optional)</label>
+                    <input type="text" id="aadhaarNumber" placeholder="1234 5678 9012" maxlength="14">
+                </div>
+                
+                <button class="btn-primary" onclick="sendOTP()" data-translate="send_otp">Send OTP</button>
+                
+                <div class="otp-section" id="otpSection" style="display: none;">
+                    <div class="input-group">
+                        <label data-translate="enter_otp">Enter OTP</label>
+                        <input type="text" id="otpCode" placeholder="123456" maxlength="6">
+                    </div>
+                    <button class="btn-primary" onclick="verifyOTP()" data-translate="verify_otp">Verify OTP</button>
+                </div>
+            </div>
+            
+            <div class="offline-indicator">
+                <i class="fas fa-wifi-slash"></i>
+                <span data-translate="offline_mode">Offline Mode</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medical History Form -->
+    <div class="medical-history-screen" id="medicalHistoryScreen" style="display: none;">
+        <div class="medical-history-container">
+            <div class="form-header">
+                <i class="fas fa-user-md"></i>
+                <h2 data-translate="medical_history">Medical History</h2>
+                <p data-translate="history_subtitle">Please provide your basic medical information</p>
+            </div>
+            
+            <div class="medical-form">
+                <div class="form-section">
+                    <h3 data-translate="personal_info">Personal Information</h3>
+                    <div class="input-group">
+                        <label data-translate="full_name">Full Name</label>
+                        <input type="text" id="fullName" placeholder="Enter your full name">
+                    </div>
+                    <div class="input-group">
+                        <label data-translate="age">Age</label>
+                        <input type="number" id="age" placeholder="Enter your age" min="1" max="120">
+                    </div>
+                    <div class="input-group">
+                        <label data-translate="gender">Gender</label>
+                        <select id="gender">
+                            <option value="" data-translate="select_gender">Select Gender</option>
+                            <option value="male" data-translate="male">Male</option>
+                            <option value="female" data-translate="female">Female</option>
+                            <option value="other" data-translate="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label data-translate="village">Village/Location</label>
+                        <input type="text" id="village" placeholder="Enter your village name">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 data-translate="medical_conditions">Medical Conditions</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="diabetes" value="diabetes">
+                            <span data-translate="diabetes">Diabetes</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="hypertension" value="hypertension">
+                            <span data-translate="hypertension">Hypertension</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="heart_disease" value="heart_disease">
+                            <span data-translate="heart_disease">Heart Disease</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="asthma" value="asthma">
+                            <span data-translate="asthma">Asthma</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="allergies" value="allergies">
+                            <span data-translate="allergies">Allergies</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="none" value="none">
+                            <span data-translate="none">None</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 data-translate="current_medications">Current Medications</h3>
+                    <div class="input-group">
+                        <label data-translate="medications_list">List your current medications</label>
+                        <textarea id="medications" placeholder="Enter medications separated by commas" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 data-translate="emergency_contact">Emergency Contact</h3>
+                    <div class="input-group">
+                        <label data-translate="contact_name">Contact Name</label>
+                        <input type="text" id="emergencyName" placeholder="Emergency contact name">
+                    </div>
+                    <div class="input-group">
+                        <label data-translate="contact_phone">Contact Phone</label>
+                        <input type="tel" id="emergencyPhone" placeholder="Emergency contact phone">
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="saveMedicalHistory()" data-translate="save_and_continue">Save and Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="app-container" id="appContainer" style="display: none;">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h3 id="userName">Patient Name</h3>
+                    <span class="user-id" id="userId">ID: P001</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="sync-status" id="syncStatus">
+                    <i class="fas fa-sync-alt"></i>
+                    <span data-translate="synced">Synced</span>
+                </div>
+                <button class="emergency-btn" onclick="showEmergency()">
+                    <i class="fas fa-phone"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="showTab('home')">
+                <i class="fas fa-home"></i>
+                <span data-translate="home">Home</span>
+            </button>
+            <button class="nav-item" onclick="showTab('appointments')">
+                <i class="fas fa-calendar-alt"></i>
+                <span data-translate="appointments">Appointments</span>
+            </button>
+            <button class="nav-item" onclick="showTab('records')">
+                <i class="fas fa-file-medical"></i>
+                <span data-translate="records">Records</span>
+            </button>
+            <button class="nav-item" onclick="showTab('medicine')">
+                <i class="fas fa-pills"></i>
+                <span data-translate="medicine">Medicine</span>
+            </button>
+            <button class="nav-item" onclick="showTab('profile')">
+                <i class="fas fa-user"></i>
+                <span data-translate="profile">Profile</span>
+            </button>
+        </nav>
+
+        <!-- Home Tab -->
+        <div class="tab-content active" id="homeTab">
+            <div class="home-container">
+                <!-- Offline Mode - Available Doctors -->
+                <div class="offline-doctors" id="offlineDoctors" style="display: none;">
+                    <h2 data-translate="available_doctors">Available Doctors</h2>
+                    <div class="doctors-grid">
+                        <div class="doctor-card" onclick="selectDoctor('Dr. Rajesh Kumar', 'General Practitioner', '+91-9876543210')">
+                            <div class="doctor-avatar">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="doctor-info">
+                                <h4>Dr. Rajesh Kumar</h4>
+                                <p>General Practitioner</p>
+                                <span class="specialization">General Medicine</span>
+                            </div>
+                            <div class="doctor-status">
+                                <span class="status-badge available">Available</span>
+                            </div>
+                        </div>
+                        
+                        <div class="doctor-card" onclick="selectDoctor('Dr. Priya Sharma', 'Pediatrician', '+91-9876543211')">
+                            <div class="doctor-avatar">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="doctor-info">
+                                <h4>Dr. Priya Sharma</h4>
+                                <p>Pediatrician</p>
+                                <span class="specialization">Child Health</span>
+                            </div>
+                            <div class="doctor-status">
+                                <span class="status-badge available">Available</span>
+                            </div>
+                        </div>
+                        
+                        <div class="doctor-card" onclick="selectDoctor('Dr. Amit Singh', 'Cardiologist', '+91-9876543212')">
+                            <div class="doctor-avatar">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="doctor-info">
+                                <h4>Dr. Amit Singh</h4>
+                                <p>Cardiologist</p>
+                                <span class="specialization">Heart Specialist</span>
+                            </div>
+                            <div class="doctor-status">
+                                <span class="status-badge available">Available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Online Mode - Quick Actions -->
+                <div class="quick-actions" id="quickActions">
+                    <h2 data-translate="quick_actions">Quick Actions</h2>
+                    <div class="action-grid">
+                        <button class="action-card" onclick="bookAppointment()">
+                            <i class="fas fa-calendar-plus"></i>
+                            <span data-translate="book_appointment">Book Appointment</span>
+                        </button>
+                        <button class="action-card" onclick="viewRecords()">
+                            <i class="fas fa-file-medical"></i>
+                            <span data-translate="view_records">View Records</span>
+                        </button>
+                        <button class="action-card" onclick="findMedicine()">
+                            <i class="fas fa-search"></i>
+                            <span data-translate="find_medicine">Find Medicine</span>
+                        </button>
+                        <button class="action-card" onclick="symptomChecker()">
+                            <i class="fas fa-robot"></i>
+                            <span data-translate="symptom_checker">Symptom Checker</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Upcoming Appointments -->
+                <div class="upcoming-section">
+                    <h2 data-translate="upcoming_appointments">Upcoming Appointments</h2>
+                    <div class="appointment-card">
+                        <div class="appointment-info">
+                            <h4>Dr. Rajesh Kumar</h4>
+                            <p>General Practitioner</p>
+                            <span class="appointment-time">Today, 2:00 PM</span>
+                        </div>
+                        <div class="appointment-status">
+                            <span class="status-badge confirmed">Confirmed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medicine Reminders -->
+                <div class="reminders-section">
+                    <h2 data-translate="medicine_reminders">Medicine Reminders</h2>
+                    <div class="reminder-card">
+                        <div class="reminder-info">
+                            <h4>Paracetamol 500mg</h4>
+                            <p>2 tablets, 3 times daily</p>
+                            <span class="reminder-time">Next: 6:00 PM</span>
+                        </div>
+                        <div class="reminder-status">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Help -->
+                <div class="emergency-section">
+                    <button class="emergency-help-btn" onclick="showEmergency()">
+                        <i class="fas fa-phone"></i>
+                        <span data-translate="emergency_help">Emergency Help</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointments Tab -->
+        <div class="tab-content" id="appointmentsTab">
+            <div class="appointments-container">
+                <div class="section-header">
+                    <h2 data-translate="my_appointments">My Appointments</h2>
+                    <button class="btn-primary" onclick="showBookingScreen()" data-translate="book_new">Book New</button>
+                </div>
+
+                <div class="appointment-list">
+                    <div class="appointment-item">
+                        <div class="appointment-date">
+                            <span class="date">15 Dec</span>
+                            <span class="time">2:00 PM</span>
+                        </div>
+                        <div class="appointment-details">
+                            <h4>Dr. Rajesh Kumar</h4>
+                            <p>General Consultation</p>
+                            <span class="appointment-id">ID: A001</span>
+                        </div>
+                        <div class="appointment-actions">
+                            <span class="status-badge confirmed">Confirmed</span>
+                            <button class="btn-call" onclick="startConsultation('A001')">
+                                <i class="fas fa-video"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="appointment-item">
+                        <div class="appointment-date">
+                            <span class="date">18 Dec</span>
+                            <span class="time">10:00 AM</span>
+                        </div>
+                        <div class="appointment-details">
+                            <h4>Dr. Priya Sharma</h4>
+                            <p>Follow-up Visit</p>
+                            <span class="appointment-id">ID: A002</span>
+                        </div>
+                        <div class="appointment-actions">
+                            <span class="status-badge pending">Pending</span>
+                            <button class="btn-cancel" onclick="cancelAppointment('A002')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offline Booking Instructions -->
+                <div class="offline-booking" id="offlineBooking" style="display: none;">
+                    <h3 data-translate="offline_booking">Offline Booking Instructions</h3>
+                    <div class="sms-instructions">
+                        <p data-translate="sms_booking_text">Send SMS to book appointment:</p>
+                        <div class="sms-example">
+                            <code>BOOK Dr.Rajesh 18-Dec 10:00AM</code>
+                        </div>
+                        <p data-translate="sms_booking_note">You will receive confirmation via SMS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Records Tab -->
+        <div class="tab-content" id="recordsTab">
+            <div class="records-container">
+                <div class="section-header">
+                    <h2 data-translate="health_records">Health Records</h2>
+                    <button class="btn-secondary" onclick="scanQR()" data-translate="scan_qr">Scan QR</button>
+                </div>
+
+                <div class="records-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">15 Dec 2024</div>
+                        <div class="timeline-content">
+                            <div class="record-header">
+                                <h4>Consultation with Dr. Rajesh Kumar</h4>
+                                <span class="record-type">Video Call</span>
+                            </div>
+                            <div class="record-details">
+                                <p><strong>Symptoms:</strong> High fever, headache</p>
+                                <p><strong>Diagnosis:</strong> Viral fever</p>
+                            </div>
+                            <div class="record-actions">
+                                <button class="btn-view" onclick="viewPrescription('P001')">
+                                    <i class="fas fa-file-prescription"></i>
+                                    <span data-translate="view_prescription">View Prescription</span>
+                                </button>
+                                <button class="btn-download" onclick="downloadRecord('R001')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">10 Dec 2024</div>
+                        <div class="timeline-content">
+                            <div class="record-header">
+                                <h4>Lab Test Results</h4>
+                                <span class="record-type">Lab Report</span>
+                            </div>
+                            <div class="record-details">
+                                <p><strong>Test:</strong> Complete Blood Count</p>
+                                <p><strong>Status:</strong> Normal</p>
+                            </div>
+                            <div class="record-actions">
+                                <button class="btn-view" onclick="viewLabReport('L001')">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span data-translate="view_report">View Report</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sync Status -->
+                <div class="sync-status-bar">
+                    <i class="fas fa-info-circle"></i>
+                    <span data-translate="sync_status_text">Some records are stored offline and will sync when online</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medicine Tab -->
+        <div class="tab-content" id="medicineTab">
+            <div class="medicine-container">
+                <div class="section-header">
+                    <h2 data-translate="medicine_finder">Medicine Finder</h2>
+                </div>
+
+                <!-- Medicine Search -->
+                <div class="medicine-search">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="medicineSearch" placeholder="Search medicine name..." onkeyup="searchMedicine()">
+                    </div>
+                </div>
+
+                <!-- Search Results -->
+                <div class="medicine-results" id="medicineResults" style="display: none;">
+                    <div class="medicine-item">
+                        <div class="medicine-info">
+                            <h4>Paracetamol 500mg</h4>
+                            <p>Pain relief and fever reducer</p>
+                        </div>
+                        <div class="medicine-status">
+                            <span class="stock-indicator available">Available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nearby Pharmacies -->
+                <div class="pharmacies-section">
+                    <h3 data-translate="nearby_pharmacies">Nearby Pharmacies</h3>
+                    <div class="pharmacy-list">
+                        <div class="pharmacy-item">
+                            <div class="pharmacy-info">
+                                <h4>Rampur Medical Store</h4>
+                                <p>2.5 km away</p>
+                                <div class="pharmacy-stock">
+                                    <span class="stock-item">Paracetamol: 5 left</span>
+                                    <span class="stock-item">Cough Syrup: 15 left</span>
+                                </div>
+                            </div>
+                            <div class="pharmacy-actions">
+                                <button class="btn-call" onclick="callPharmacy('P001')">
+                                    <i class="fas fa-phone"></i>
+                                </button>
+                                <button class="btn-navigate" onclick="navigateToPharmacy('P001')">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="pharmacy-item">
+                            <div class="pharmacy-info">
+                                <h4>Devpur Health Center</h4>
+                                <p>4.2 km away</p>
+                                <div class="pharmacy-stock">
+                                    <span class="stock-item">Paracetamol: 20 left</span>
+                                    <span class="stock-item">Antibiotics: 8 left</span>
+                                </div>
+                            </div>
+                            <div class="pharmacy-actions">
+                                <button class="btn-call" onclick="callPharmacy('P002')">
+                                    <i class="fas fa-phone"></i>
+                                </button>
+                                <button class="btn-navigate" onclick="navigateToPharmacy('P002')">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offline Notice -->
+                <div class="offline-notice" id="offlineNotice" style="display: none;">
+                    <i class="fas fa-wifi-slash"></i>
+                    <span data-translate="offline_medicine_notice">Showing cached pharmacy data. Last updated: 2 hours ago</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Tab -->
+        <div class="tab-content" id="profileTab">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar-large">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="profileName">Patient Name</h2>
+                        <p id="profilePhone">+91 98765 43210</p>
+                        <p id="profileVillage">Rampur Village</p>
+                    </div>
+                </div>
+
+                <div class="profile-menu">
+                    <button class="menu-item" onclick="editProfile()">
+                        <i class="fas fa-edit"></i>
+                        <span data-translate="edit_profile">Edit Profile</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="menu-item" onclick="viewMedicalRecords()">
+                        <i class="fas fa-file-medical"></i>
+                        <span data-translate="medical_records">Medical Records</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="menu-item" onclick="changeLanguage()">
+                        <i class="fas fa-language"></i>
+                        <span data-translate="change_language">Change Language</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="menu-item" onclick="notificationSettings()">
+                        <i class="fas fa-bell"></i>
+                        <span data-translate="notifications">Notifications</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="menu-item" onclick="helpSupport()">
+                        <i class="fas fa-question-circle"></i>
+                        <span data-translate="help_support">Help & Support</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="menu-item" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span data-translate="logout">Logout</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Modal -->
+    <div class="modal" id="emergencyModal">
+        <div class="modal-content emergency-modal">
+            <div class="modal-header">
+                <h3 data-translate="emergency_help">Emergency Help</h3>
+                <button class="modal-close" onclick="closeEmergency()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="emergency-options">
+                    <button class="emergency-option" onclick="callEmergency('hospital')">
+                        <i class="fas fa-hospital"></i>
+                        <span data-translate="call_hospital">Call Civil Hospital</span>
+                    </button>
+                    <button class="emergency-option" onclick="callEmergency('healthworker')">
+                        <i class="fas fa-user-md"></i>
+                        <span data-translate="call_health_worker">Call Health Worker</span>
+                    </button>
+                    <button class="emergency-option" onclick="sendLocationSMS()">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-translate="send_location">Send Location via SMS</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Symptom Checker Modal -->
+    <div class="modal" id="symptomModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-translate="ai_symptom_checker">AI Symptom Checker</h3>
+                <button class="modal-close" onclick="closeSymptomChecker()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot">
+                            <p data-translate="symptom_welcome">Hello! I'm here to help you understand your symptoms. What are you experiencing today?</p>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="symptomInput" placeholder="Describe your symptoms..." onkeypress="handleSymptomInput(event)">
+                        <button onclick="sendSymptomMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMS Mode Modal -->
+    <div class="modal" id="smsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-translate="sms_consultation">SMS Consultation</h3>
+                <button class="modal-close" onclick="closeSMSModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="sms-container">
+                    <div class="selected-doctor">
+                        <h4 id="selectedDoctorName">Dr. Rajesh Kumar</h4>
+                        <p id="selectedDoctorSpecialty">General Practitioner</p>
+                        <p id="selectedDoctorPhone">+91-9876543210</p>
+                    </div>
+                    
+                    <div class="sms-instructions">
+                        <h4 data-translate="sms_instructions">SMS Instructions</h4>
+                        <div class="instruction-step">
+                            <span class="step-number">1</span>
+                            <p data-translate="sms_step1">Send SMS to the doctor's number with your symptoms</p>
+                        </div>
+                        <div class="instruction-step">
+                            <span class="step-number">2</span>
+                            <p data-translate="sms_step2">Include your patient ID and basic information</p>
+                        </div>
+                        <div class="instruction-step">
+                            <span class="step-number">3</span>
+                            <p data-translate="sms_step3">Wait for doctor's response with advice</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sms-template">
+                        <h4 data-translate="sms_template">SMS Template</h4>
+                        <div class="template-box">
+                            <textarea id="smsTemplate" readonly rows="6">Patient ID: P001
+Name: [Your Name]
+Age: [Your Age]
+Symptoms: [Describe your symptoms]
+Duration: [How long]
+Previous conditions: [Any existing conditions]</textarea>
+                        </div>
+                        <button class="btn-primary" onclick="sendSMS()" data-translate="send_sms">Send SMS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Screen Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content booking-modal">
+            <div class="modal-header">
+                <h3 data-translate="book_appointment">Book Appointment</h3>
+                <button class="modal-close" onclick="closeBookingModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="booking-container">
+                    <!-- Doctor Selection -->
+                    <div class="doctor-selection">
+                        <h4 data-translate="select_doctor">Select Doctor</h4>
+                        <div class="doctor-options">
+                            <div class="doctor-option" onclick="selectBookingDoctor('Dr. Rajesh Kumar', 'General Practitioner')">
+                                <div class="doctor-avatar-small">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="doctor-details">
+                                    <h5>Dr. Rajesh Kumar</h5>
+                                    <p>General Practitioner</p>
+                                </div>
+                            </div>
+                            <div class="doctor-option" onclick="selectBookingDoctor('Dr. Priya Sharma', 'Pediatrician')">
+                                <div class="doctor-avatar-small">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="doctor-details">
+                                    <h5>Dr. Priya Sharma</h5>
+                                    <p>Pediatrician</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appointment Mode -->
+                    <div class="appointment-mode">
+                        <h4 data-translate="appointment_mode">Appointment Mode</h4>
+                        <div class="mode-options">
+                            <label class="mode-option">
+                                <input type="radio" name="appointmentMode" value="video" checked>
+                                <div class="mode-card">
+                                    <i class="fas fa-video"></i>
+                                    <span data-translate="video_call">Video Call</span>
+                                </div>
+                            </label>
+                            <label class="mode-option">
+                                <input type="radio" name="appointmentMode" value="audio">
+                                <div class="mode-card">
+                                    <i class="fas fa-phone"></i>
+                                    <span data-translate="audio_call">Audio Call</span>
+                                </div>
+                            </label>
+                            <label class="mode-option">
+                                <input type="radio" name="appointmentMode" value="sms">
+                                <div class="mode-card">
+                                    <i class="fas fa-sms"></i>
+                                    <span data-translate="sms_consultation">SMS Consultation</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Available Slots -->
+                    <div class="available-slots">
+                        <h4 data-translate="available_slots">Available Slots</h4>
+                        <div class="slots-grid" id="slotsGrid">
+                            <!-- Slots will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Booking Summary -->
+                    <div class="booking-summary" id="bookingSummary" style="display: none;">
+                        <h4 data-translate="booking_summary">Booking Summary</h4>
+                        <div class="summary-details">
+                            <p><strong data-translate="doctor">Doctor:</strong> <span id="selectedDoctorNameSummary"></span></p>
+                            <p><strong data-translate="mode">Mode:</strong> <span id="selectedModeSummary"></span></p>
+                            <p><strong data-translate="date_time">Date & Time:</strong> <span id="selectedDateTimeSummary"></span></p>
+                        </div>
+                        <button class="btn-primary" onclick="confirmBooking()" data-translate="confirm_booking">Confirm Booking</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-translate="booking_confirmed">Booking Confirmed</h3>
+                <button class="modal-close" onclick="closeConfirmationModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-container">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4 data-translate="booking_successful">Booking Successful!</h4>
+                    <div class="booking-details">
+                        <p><strong data-translate="booking_id">Booking ID:</strong> <span id="bookingId"></span></p>
+                        <p><strong data-translate="doctor">Doctor:</strong> <span id="confirmedDoctor"></span></p>
+                        <p><strong data-translate="date_time">Date & Time:</strong> <span id="confirmedDateTime"></span></p>
+                        <p><strong data-translate="mode">Mode:</strong> <span id="confirmedMode"></span></p>
+                    </div>
+                    <div class="sms-fallback">
+                        <p data-translate="sms_fallback_note">You will receive an SMS confirmation shortly.</p>
+                    </div>
+                    <button class="btn-primary" onclick="closeConfirmationModal()" data-translate="done">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prescription Modal -->
+    <div class="modal" id="prescriptionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-translate="prescription">Prescription</h3>
+                <button class="modal-close" onclick="closePrescriptionModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="prescription-container">
+                    <div class="prescription-header">
+                        <div class="prescription-info">
+                            <h4 id="prescriptionDoctor">Dr. Rajesh Kumar</h4>
+                            <p id="prescriptionDate">15 Dec 2024</p>
+                            <span class="prescription-id">ID: RX001</span>
+                        </div>
+                        <div class="offline-indicator">
+                            <i class="fas fa-clock"></i>
+                            <span data-translate="last_updated">Last updated locally 2 hrs ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="prescription-content">
+                        <div class="medicines-list">
+                            <h5 data-translate="medicines">Medicines</h5>
+                            <div class="medicine-item">
+                                <span class="medicine-name">Paracetamol 500mg</span>
+                                <span class="medicine-dosage">1 tablet, 3 times daily</span>
+                            </div>
+                            <div class="medicine-item">
+                                <span class="medicine-name">Cough Syrup</span>
+                                <span class="medicine-dosage">2 spoons, twice daily</span>
+                            </div>
+                        </div>
+                        
+                        <div class="prescription-actions">
+                            <button class="btn-secondary" onclick="downloadPrescriptionPDF()">
+                                <i class="fas fa-download"></i>
+                                <span data-translate="download_pdf">Download PDF</span>
+                            </button>
+                            <button class="btn-secondary" onclick="scanQRAtPharmacy()">
+                                <i class="fas fa-qrcode"></i>
+                                <span data-translate="scan_qr_pharmacy">Scan QR at Pharmacy</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="next-appointment">
+                        <h5 data-translate="next_appointment">Next Appointment</h5>
+                        <div class="appointment-card">
+                            <div class="appointment-info">
+                                <h6>Dr. Rajesh Kumar</h6>
+                                <p>Follow-up Visit</p>
+                                <span class="appointment-date">20 Dec 2024, 10:00 AM</span>
+                            </div>
+                            <div class="appointment-status">
+                                <span class="status-badge confirmed">Scheduled</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medicine Pickup Modal -->
+    <div class="modal" id="pickupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-translate="medicine_pickup">Medicine Pickup</h3>
+                <button class="modal-close" onclick="closePickupModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="pickup-container">
+                    <div class="pharmacy-info">
+                        <h4 id="pharmacyName">Rampur Medical Store</h4>
+                        <p id="pharmacyAddress">Near Bus Stand, Rampur Village</p>
+                        <p id="pharmacyDistance">2.5 km away</p>
+                    </div>
+                    
+                    <div class="pickup-question">
+                        <h4 data-translate="pickup_question">Did you take medicine from allocated shop?</h4>
+                        <div class="pickup-options">
+                            <button class="pickup-btn yes-btn" onclick="confirmPickup(true)">
+                                <i class="fas fa-check"></i>
+                                <span data-translate="yes">YES</span>
+                            </button>
+                            <button class="pickup-btn no-btn" onclick="confirmPickup(false)">
+                                <i class="fas fa-times"></i>
+                                <span data-translate="no">NO</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="pickup-status" id="pickupStatus" style="display: none;">
+                        <div class="status-message">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="pickup_confirmed">Medicine pickup confirmed!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Smart Alerts -->
+    <div class="smart-alerts" id="smartAlerts">
+        <!-- Alerts will be populated by JavaScript -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

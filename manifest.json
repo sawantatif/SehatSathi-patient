@@ -1,0 +1,87 @@
+{
+  "name": "SehatSathi - Patient App",
+  "short_name": "SehatSathi",
+  "description": "Rural telemedicine patient app for health consultations and medicine management",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["health", "medical", "telemedicine"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiMzYjgyZjYiLz4KPHBhdGggZD0iTTk2IDQ4QzExMi41IDQ4IDEyOCA1My41IDE0MCA2MkMxNTIgNzAuNSAxNjAgODIuNSAxNjAgOTZDMTYwIDEwOS41IDE1MiAxMjEuNSAxNDAgMTMwQzEyOCAxMzguNSAxMTIuNSAxNDQgOTYgMTQ0Qzc5LjUgMTQ0IDY0IDEzOC41IDUyIDEzMEM0MCAxMjEuNSAzMiAxMDkuNSAzMiA5NkMzMiA4Mi41IDQwIDcwLjUgNTIgNjJDNjQgNTMuNSA3OS41IDQ4IDk2IDQ4WiIgZmlsbD0iI2ZmZmZmZiIvPgo8cGF0aCBkPSJNODAgODhIMTEyVjEyMEg4MFY4OFoiIGZpbGw9IiMzYjgyZjYiLz4KPHBhdGggZD0iTTg4IDk2SDEwNFYxMTJIODhWOTZaIiBmaWxsPSIjZmZmZmZmIi8+Cjwvc3ZnPgo=",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iNjQiIGZpbGw9IiMzYjgyZjYiLz4KPHBhdGggZD0iTTI1NiAxMjhDMzAwIDEyOCAzNDQgMTQyLjY2NyAzNzMuMzMzIDE3MkM0MDIuNjY3IDIwMS4zMzMgNDE3IDI0NS42NjcgNDE3IDI5MEM0MTcgMzM0LjMzMyA0MDIuNjY3IDM3OC42NjcgMzczLjMzMyA0MDhDMzQ0IDQzNy4zMzMgMzAwIDQ1MiAyNTYgNDUyQzIxMiA0NTIgMTY4IDQzNy4zMzMgMTM4LjY2NyA0MDhDMTEwIDM3OC42NjcgOTYgMzM0LjMzMyA5NiAyOTBDOTYgMjQ1LjY2NyAxMTAgMjAxLjMzMyAxMzguNjY3IDE3MkMxNjggMTQyLjY2NyAyMTIgMTI4IDI1NiAxMjhaIiBmaWxsPSIjZmZmZmZmIi8+CjxwYXRoIGQ9Ik0yMzIgMjM2SDI4MFYyODRIMjMyVjIzNloiIGZpbGw9IiMzYjgyZjYiLz4KPHBhdGggZD0iTTI0MCAyNDRIMjcyVjI3NkgyNDBWMjQ0WiIgZmlsbD0iI2ZmZmZmZiIvPgo8L3N2Zz4K",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzc1IiBoZWlnaHQ9IjY2NyIgdmlld0JveD0iMCAwIDM3NSA2NjciIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzNzUiIGhlaWdodD0iNjY3IiBmaWxsPSIjZjhmYWZjIi8+CjxyZWN0IHg9IjIwIiB5PSI0MCIgd2lkdGg9IjMzNSIgaGVpZ2h0PSI2MCIgcng9IjEyIiBmaWxsPSIjZmZmZmZmIi8+Cjx0ZXh0IHg9IjE4Ny41IiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzExMTgyNyIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNjAwIj5TZWhhdFNhdGhpPC90ZXh0Pgo8cmVjdCB4PSIyMCIgeT0iMTIwIiB3aWR0aD0iMzM1IiBoZWlnaHQ9IjIwMCIgcng9IjEyIiBmaWxsPSIjZmZmZmZmIi8+Cjx0ZXh0IHg9IjE4Ny41IiB5PSIxNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxMTE4MjciIGZvbnQtZmFtaWx5PSJJbnRlciIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjYwMCI+UXVpY2sgQWN0aW9uczwvdGV4dD4KPHJlY3QgeD0iNDAiIHk9IjE2MCIgd2lkdGg9IjEzNSIgaGVpZ2h0PSIxMjAiIHJ4PSI4IiBmaWxsPSIjZjhmYWZjIi8+CjxyZWN0IHg9IjIwMCIgeT0iMTYwIiB3aWR0aD0iMTM1IiBoZWlnaHQ9IjEyMCIgcng9IjgiIGZpbGw9IiNmOGZhZmMiLz4KPHJlY3QgeD0iNDAiIHk9IjMwMCIgd2lkdGg9IjEzNSIgaGVpZ2h0PSIxMjAiIHJ4PSI4IiBmaWxsPSIjZjhmYWZjIi8+CjxyZWN0IHg9IjIwMCIgeT0iMzAwIiB3aWR0aD0iMTM1IiBoZWlnaHQ9IjEyMCIgcng9IjgiIGZpbGw9IiNmOGZhZmMiLz4KPHJlY3QgeD0iMjAiIHk9IjQ0MCIgd2lkdGg9IjMzNSIgaGVpZ2h0PSIxMjAiIHJ4PSIxMiIgZmlsbD0iI2ZmZmZmZiIvPgo8dGV4dCB4PSIxODcuNSIgeT0iNDYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMTExODI3IiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI2MDAiPkVtZXJnZW5jeSBIZWxwPC90ZXh0Pgo8cmVjdCB4PSIyMCIgeT0iNTgwIiB3aWR0aD0iMzM1IiBoZWlnaHQ9IjQ3IiBmaWxsPSIjZmZmZmZmIi8+Cjx0ZXh0IHg9IjE4Ny41IiB5PSI2MDciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2YjcyODAiIGZvbnQtZmFtaWx5PSJJbnRlciIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjUwMCI+SG9tZTwvdGV4dD4KPC9zdmc+Cg==",
+      "sizes": "375x667",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book Appointment",
+      "short_name": "Book",
+      "description": "Quickly book a doctor appointment",
+      "url": "/?action=book",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTIiIGZpbGw9IiMzYjgyZjYiLz4KPHBhdGggZD0iTTQ4IDI0QzU2LjI4NDMgMjQgNjQgMjcuNTcxNCA2NCAzMlY2NEM2NCA2OC40Mjg2IDU2LjI4NDMgNzIgNDggNzJDNDAuNzE1NyA3MiAzMiA2OC40Mjg2IDMyIDY0VjMyQzMyIDI3LjU3MTQgNDAuNzE1NyAyNCA0OCAyNFoiIGZpbGw9IiNmZmZmZmYiLz4KPC9zdmc+Cg==",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Emergency Help",
+      "short_name": "Emergency",
+      "description": "Get emergency medical help",
+      "url": "/?action=emergency",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTIiIGZpbGw9IiNlZjQ0NDQiLz4KPHBhdGggZD0iTTQ4IDI0QzU2LjI4NDMgMjQgNjQgMjcuNTcxNCA2NCAzMlY2NEM2NCA2OC40Mjg2IDU2LjI4NDMgNzIgNDggNzJDNDAuNzE1NyA3MiAzMiA2OC40Mjg2IDMyIDY0VjMyQzMyIDI3LjU3MTQgNDAuNzE1NyAyNCA0OCAyNFoiIGZpbGw9IiNmZmZmZmYiLz4KPC9zdmc+Cg==",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "View Records",
+      "short_name": "Records",
+      "description": "Access your health records",
+      "url": "/?action=records",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTIiIGZpbGw9IiMwNTk2NjkiLz4KPHBhdGggZD0iTTQ4IDI0QzU2LjI4NDMgMjQgNjQgMjcuNTcxNCA2NCAzMlY2NEM2NCA2OC40Mjg2IDU2LjI4NDMgNzIgNDggNzJDNDAuNzE1NyA3MiAzMiA2OC40Mjg2IDMyIDY0VjMyQzMyIDI3LjU3MTQgNDAuNzE1NyAyNCA0OCAyNFoiIGZpbGw9IiNmZmZmZmYiLz4KPC9zdmc+Cg==",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://sehatsathi.vercel.app"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}
